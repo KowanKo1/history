@@ -1,5 +1,6 @@
 from sqlmodel import Session, select
 from app.models import Item, Category, Transaction
+from typing import Optional
 
 # CRUD for Item
 def create_item(db: Session, item: Item):
