@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
-from app.database import get_db
-from app.models import Item
-from app.crud import create_item, get_items, update_stock
+from database import get_db
+from models import Item
+from crud import create_item, get_items, update_stock
+from typing import Optional
 
 router = APIRouter()
 

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlmodel import Session
-from app.database import get_db
-from app.models import Category
-from app.crud import create_category, get_categories
+from database import get_db
+from models import Category
+from crud import create_category, get_categories
 
 router = APIRouter()
 

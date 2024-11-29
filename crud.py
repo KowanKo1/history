@@ -1,5 +1,5 @@
 from sqlmodel import Session, select
-from app.models import Item, Category, Transaction
+from models import Item, Category, Transaction
 from typing import Optional
 
 # CRUD for Item

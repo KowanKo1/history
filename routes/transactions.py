@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlmodel import Session
-from app.database import get_db
-from app.models import Transaction
-from app.crud import get_transactions
+from database import get_db
+from models import Transaction
+from crud import get_transactions
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from app.database import init_db
-from app.routes import items, categories, transactions
+from database import init_db
+from routes import items, categories, transactions
 
 app = FastAPI(title="Inventory Management API")
 
