@@ -16,13 +16,16 @@ JWT_REFRESH_SECRET_KEY = os.environ['JWT_REFRESH_SECRET_KEY']    # should be kep
 def get_hashed_password(password: str) -> str:
     pwd_bytes = password.encode('utf-8')
     salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password=pwd_bytes, salt=salt)
-    return hashed_password
+    hashed_password = bcrypt.hashpw(pwd_bytes, salt)
+    return hashed_password.decode('utf-8')
 
 
 def verify_password(password: str, hashed_pass: str) -> bool:
+    print("pertama: ", password)
+    print("kedua: ", hashed_pass)
     password_byte_enc = password.encode('utf-8')
-    return bcrypt.checkpw(password = password_byte_enc , hashed_password = hashed_pass)
+    hashed_pass_bytes = hashed_pass.encode('utf-8')
+    return bcrypt.checkpw(password = password_byte_enc , hashed_password = hashed_pass_bytes)
 
 def create_access_token(subject: Union[str, Any], expires_delta: int = None) -> str:
     if expires_delta is not None:

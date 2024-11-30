@@ -8,7 +8,7 @@ from crud import *
 
 router = APIRouter()
 
-@router.post('/signup', summary="Create new account", response_model=RegisterResponse)
+@router.post('/register', summary="Create new account", response_model=RegisterResponse)
 async def register(account: Account, db: Session = Depends(get_db)):
     exist = get_account_by_email(db, account.email)
     print("emangnya ada: ", account)
@@ -20,6 +20,7 @@ async def register(account: Account, db: Session = Depends(get_db)):
     account.password = get_hashed_password(account.password)
     account.createdAt = datetime.now()
     account.modifiedAt = datetime.now()
+    print("finalaccount: ",account)
     # account:Account = {
     #     'email': account.email,
     #     'password': get_hashed_password(account.password),
@@ -40,8 +41,8 @@ async def login(request:LoginRequest, db:Session = Depends(get_db)):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Incorrect email or password"
         )
-
-    hashed_pass = account['password']
+    print("coba ini aman ga", account)
+    hashed_pass = account.password
     if not verify_password(request.password, hashed_pass):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -49,8 +50,8 @@ async def login(request:LoginRequest, db:Session = Depends(get_db)):
         )
     
     response: LoginResponse = LoginResponse(
-         access_token=create_access_token(account['email']),
-         refresh_token=create_refresh_token(account['email']),
+         access_token=create_access_token(account.email),
+         refresh_token=create_refresh_token(account.email),
     )
 
     return response
