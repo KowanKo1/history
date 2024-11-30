@@ -6,15 +6,13 @@ class MetadataBase(SQLModel):
     createdAt: datetime
     modifiedAt: datetime
 
-# User Model
-class UserBase(MetadataBase):
-    username: str
+class AccountBase(MetadataBase):
     password: str
     firstname: str
     lastname: str
 
-class User(UserBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True) 
+class Account(AccountBase, table=True):
+    email: str = Field(sa_column_kwargs={"unique":True}, primary_key=True)
 
 # Item Model
 class ItemBase(MetadataBase):
@@ -22,7 +20,7 @@ class ItemBase(MetadataBase):
     code: str
     description: Optional[str] = None
     stock: int = 0
-    user_id: int = Field(foreign_key="user.id")
+    account_email: str = Field(foreign_key="account.email")
     category_id: int | None = Field(default=None, foreign_key="category.id")
 
 class Item(ItemBase, table=True):
@@ -40,7 +38,7 @@ class TransactionBase(MetadataBase):
     quantity: int
     transaction_type: str  # "in" or "out"
     timestamp: datetime = Field(default_factory=datetime.utcnow)
-    user_id: int = Field( foreign_key="user.id")
+    account_email: str = Field( foreign_key="account.email")
     item_id: int = Field( foreign_key="item.id")
 
 class Transaction(TransactionBase, table=True):

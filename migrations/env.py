@@ -7,7 +7,7 @@ from pathlib import Path
 
 from alembic import context
 
-from models import Category, Item, User, Transaction
+from models import Category, Item, Account, Transaction
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
