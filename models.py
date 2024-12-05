@@ -20,12 +20,3 @@ class CategoryBase(SQLModel):
 class Category(CategoryBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
-# Transaction Model
-class TransactionBase(SQLModel):
-    item_id: int
-    quantity: int
-    transaction_type: str  # "in" or "out"
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class Transaction(TransactionBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
