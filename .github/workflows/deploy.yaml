@@ -36,7 +36,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.GCP_USERNAME }}@${{ secrets.GCP_STATIC_IP }} '
             sudo docker container rm -f ${{ secrets.CONTAINER_NAME_HISTORY }} || true &&
             sudo docker image rm -f ${{ secrets.DOCKER_USERNAME }}/${{ secrets.CONTAINER_NAME_HISTORY }}:latest || true &&
-            sudo docker run --name ${{ secrets.CONTAINER_NAME_HISTORY }} --restart unless-stopped -d -p 8002:8000 \
+            sudo docker run --name ${{ secrets.CONTAINER_NAME_HISTORY }} --restart unless-stopped -d -p 8002:8002 \
             --network host \
             -e INVENTORY_SERVICE_URL="http://localhost:8001" \
             -e AUTHENTICATION_SERVICE_URL="http://localhost:8000" \
